@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "uart_protocol_driver.h": "c",
+        "status_led_driver.h": "c",
+        "arduino.h": "c",
+        "hardwareserial.h": "c"
+    }
+}
