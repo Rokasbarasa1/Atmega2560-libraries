@@ -39,7 +39,7 @@ int main(void){
     uart_write_string(0, "\nSerial 2 \n");
     uart_write_string(0, binary_to_string(UBRR2H));
     uart_write_string(0, binary_to_string(UBRR2L));
-    uart_write_string(0, " \n");
+    // uart_write_string(0, " \n");
 
     // uart_write_string(2,"AT\r\n\0");
 

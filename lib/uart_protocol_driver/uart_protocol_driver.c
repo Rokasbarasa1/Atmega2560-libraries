@@ -94,10 +94,10 @@ void init_uart_protocol(uint8_t serial_device, uint32_t baud_rate){
         // UCSR0C &= ~(_BV(UCSZ00));
 
         // // set interrupts to happen when data 
-        if(serial_device == 2){
-            *serials[serial_device].control_register_b |= _BV(RXCIE1) | _BV(UDRIE1);
-            sei();
-        }
+        // if(serial_device == 2){
+        //     *serials[serial_device].control_register_b |= _BV(RXCIE1) | _BV(UDRIE1);
+        //     sei();
+        // }
 
         // enable receive and transmit
         *serials[serial_device].control_register_b |= _BV(TXEN1) | _BV(RXEN1);
@@ -105,28 +105,28 @@ void init_uart_protocol(uint8_t serial_device, uint32_t baud_rate){
     }
 }
 
-#define RX_BUFFER_SIZE 128
-volatile static uint8_t rx_buffer[8] = {0};
-volatile static uint16_t rx_count = 0;	
-volatile static uint8_t uart_tx_busy = 1;
+// #define RX_BUFFER_SIZE 128
+// volatile static uint8_t rx_buffer[8] = {0};
+// volatile static uint16_t rx_count = 0;	
+// volatile static uint8_t uart_tx_busy = 1;
 
-ISR(USART2_RX_vect){
+// ISR(USART2_RX_vect){
 	
-	volatile static uint16_t rx_write_pos = 0;
+// 	volatile static uint16_t rx_write_pos = 0;
 	
-	rx_buffer[rx_write_pos] = UDR0;
-	rx_count++;
-	rx_write_pos++;
-	if(rx_write_pos >= RX_BUFFER_SIZE){
-		rx_write_pos = 0;
-	}
+// 	rx_buffer[rx_write_pos] = UDR0;
+// 	rx_count++;
+// 	rx_write_pos++;
+// 	if(rx_write_pos >= RX_BUFFER_SIZE){
+// 		rx_write_pos = 0;
+// 	}
 	
-}
+// }
 
 
-ISR(USART2_TX_vect){
-	uart_tx_busy = 1;
-}
+// ISR(USART2_TX_vect){
+// 	uart_tx_busy = 1;
+// }
 
 
 
@@ -168,21 +168,21 @@ uint8_t uart_read_byte(uint8_t serial_device){
 }
 
 
-void uart_send_byte(uint8_t c){
-	while(uart_tx_busy == 0);
-	uart_tx_busy = 0;
-	UDR0 = c;
-}
+// void uart_send_byte(uint8_t c){
+// 	while(uart_tx_busy == 0);
+// 	uart_tx_busy = 0;
+// 	UDR0 = c;
+// }
 
-uint8_t uart_read(void){
-	static uint16_t rx_read_pos = 0;
-	uint8_t data = 0;
+// uint8_t uart_read(void){
+// 	static uint16_t rx_read_pos = 0;
+// 	uint8_t data = 0;
 	
-	data = rx_buffer[rx_read_pos];
-	rx_read_pos++;
-	rx_count--;
-	if(rx_read_pos >= RX_BUFFER_SIZE){
-		rx_read_pos = 0;
-	}
-	return data;
-}
+// 	data = rx_buffer[rx_read_pos];
+// 	rx_read_pos++;
+// 	rx_count--;
+// 	if(rx_read_pos >= RX_BUFFER_SIZE){
+// 		rx_read_pos = 0;
+// 	}
+// 	return data;
+// }
