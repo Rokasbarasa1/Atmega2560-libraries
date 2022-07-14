@@ -1,5 +1,7 @@
 #include "./uart_protocol_driver.h"
 #include <string.h>
+#include <stdlib.h>
+
 // Modes:
 //  Async normal - data is transmitted by pulses of baud rate
 //  Async double speed - like first mode but double speed. Uses when accurate baud rate 
@@ -91,12 +93,10 @@ void init_uart_protocol(uint8_t serial_device, uint32_t baud_rate){
 
         // set data frame format as 8 bit size
         *serials[serial_device].control_register_c |= _BV(UCSZ11) | _BV(UCSZ10);
-        // UCSR0C &= ~(_BV(UCSZ00));
 
         // // set interrupts to happen when data 
         // if(serial_device == 2){
         //     *serials[serial_device].control_register_b |= _BV(RXCIE1) | _BV(UDRIE1);
-        //     sei();
         // }
 
         // enable receive and transmit
@@ -143,25 +143,23 @@ uint8_t uart_write_ready(uint8_t serial_device){
 }
 
 void uart_write_byte(uint8_t serial_device, uint8_t data){
-    while (!uart_write_ready(serial_device)){
-
-    }
+    while (!uart_write_ready(serial_device));
     
     // This is possible because the register is split into two. With separate read, write
     *serials[serial_device].data = data;
 }
 
-void uart_write_string(uint8_t serial_device, char *string){
+void uart_write_string(uint8_t serial_device, char *string, uint8_t free_string){
     for(uint8_t i = 0; i < strlen(string); i++){
         uart_write_byte(serial_device, string[i]);
+    }
+    if(free_string){
+        free(string);
     }
 }
 
 uint8_t uart_read_byte(uint8_t serial_device){
-
-    while (!uart_read_ready(serial_device)){
-
-    }
+    while (!uart_read_ready(serial_device));
 
     // This is possible because the register is split into two. With separate read, write
     return *serials[serial_device].data;

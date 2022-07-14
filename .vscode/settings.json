@@ -3,6 +3,11 @@
         "uart_protocol_driver.h": "c",
         "status_led_driver.h": "c",
         "arduino.h": "c",
-        "hardwareserial.h": "c"
+        "hardwareserial.h": "c",
+        "stdbool.h": "c",
+        "twi.h": "c",
+        "stdio.h": "c",
+        "i2c_protocol_driver.h": "c",
+        "string.h": "c"
     }
 }
