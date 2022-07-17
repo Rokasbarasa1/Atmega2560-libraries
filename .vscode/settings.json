@@ -8,6 +8,16 @@
         "twi.h": "c",
         "stdio.h": "c",
         "i2c_protocol_driver.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "twi_master.h": "c",
+        "interrupt.h": "c",
+        "stdlib.h": "c",
+        "adxl345_accelerometer_driver.h": "c",
+        "io.h": "c",
+        "delay.h": "c"
+    },
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
     }
 }

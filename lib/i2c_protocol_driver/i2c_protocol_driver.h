@@ -9,10 +9,10 @@
 #endif
 
 void init_i2c();
-void i2c_start();
-void i2c_slave_address_action(uint8_t address, uint8_t action);
-void i2c_write(uint8_t data);
+uint8_t i2c_start();
+uint8_t i2c_slave_address_action(uint8_t address, uint8_t action);
+uint8_t i2c_write(uint8_t data);
 void i2c_stop();
-uint8_t i2c_read(uint8_t ack);
-void i2c_master_write(uint8_t address, uint8_t* data, uint8_t data_length, uint8_t stop_transmission);
-void i2c_master_read(uint8_t address, uint8_t* returned_data, uint8_t quantity);
+uint8_t i2c_read(uint8_t ack, uint8_t* data);
+uint8_t i2c_master_write(uint8_t address, uint8_t* data, uint8_t data_length, uint8_t stop_transmission);
+uint8_t i2c_master_read(uint8_t address, uint8_t* returned_data, uint8_t quantity);
